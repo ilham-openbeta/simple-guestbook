@@ -10,8 +10,6 @@ Features :
 
 - Pretty simple create & read the post from the database for the guestbook
 
-
-
 ### How to install
 
 1. Clone this repository
@@ -26,6 +24,10 @@ CREATE TABLE IF NOT EXISTS messages (
     contact varchar(50) NOT NULL,
     created_at datetime NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `messages` ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `messages` MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 ```
 
 2. Create .env files, check env.example for example.
@@ -63,4 +65,6 @@ CREATE TABLE IF NOT EXISTS messages (
 
 
 
-MIT LICENSE
+### LICENSE
+
+MIT

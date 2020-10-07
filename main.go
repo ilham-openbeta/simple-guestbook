@@ -3,14 +3,10 @@ package main
 import (
 	"github.com/joho/godotenv"
 	"os"
-	"log"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-	  log.Fatal("Error loading .env file")
-	}
+	godotenv.Load()
 	a := App{}
 	a.Initialize(
 		os.Getenv("DB_HOST"),

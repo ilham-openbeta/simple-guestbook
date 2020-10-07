@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/joho/godotenv"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -15,10 +14,7 @@ import (
 var a App
 
 func TestMain(m *testing.M) {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	godotenv.Load()
 	a.Initialize(
 		os.Getenv("DB_HOST"),
 		os.Getenv("DB_PORT"),
