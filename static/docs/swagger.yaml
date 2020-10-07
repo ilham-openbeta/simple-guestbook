@@ -1,0 +1,92 @@
+swagger: "2.0"
+info:
+  description: "Simple Guest Book API"
+  version: "1.0.0"
+  title: "Guestbook API"
+host: "guestbook.ilham.web.id"
+basePath: "/api/v1"
+tags:
+- name: "messages"
+  description: "Send and retrive messages"
+schemes:
+- "http"
+paths:
+  /message:
+    post:
+      tags:
+      - "messages"
+      summary: "Add a new messages to the guest book"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "message object to be added to the guest book"
+        required: true
+        schema:
+          $ref: "#/definitions/message"
+      responses:
+        "201":
+          description: "Message submitted"
+        "400":
+          description: "Invalid payload"
+  /messages:
+    get:
+      tags:
+      - "messages"
+      summary: "Return all messages"
+      description: "add start and count query param to limit the result"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "start"
+        in: "query"
+        description: "Starting row"
+        type: "integer"
+      - name: "count"
+        in: "query"
+        description: "Total row"
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/messages"
+definitions:
+  message:
+    type: "object"
+    required:
+    - "name"
+    - "message"
+    - "contact"
+    properties:
+      name:
+        type: "string"
+        example: "John Doe"
+      message:
+        type: "string"
+        example: "Lorem ipsum dolor sit amet"
+      contact:
+        type: "string"
+        example: "08123456 or test@test.com or http://test.com"
+  messages:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: 1
+      name:
+        type: "string"
+        example: "John Doe"
+      message:
+        type: "string"
+        example: "Lorem ipsum dolor sit amet"
+      created_at:
+        type: "string"
+        example: "2006-01-02 15:04:05"
+externalDocs:
+  description: "Get the source code here"
+  url: "http://github.com/ilham-openbeta/simple-guestbook/"

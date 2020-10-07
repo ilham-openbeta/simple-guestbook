@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Book</title>
+</head>
+
+<body>
+    <style>
+
+    </style>
+    <form id="myform" action=""></form>
+    <table>
+        <tr>
+            <td>Name :</td>
+            <td><input type="text" id="name"></td>
+        </tr>
+        <tr>
+            <td>Contact :</td>
+            <td><input type="text" id="contact"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="font-size: small;">* Contact can be email, number, or url</div>
+            </td>
+        </tr>
+        <tr>
+            <td>Message :</td>
+            <td><textarea id="message" cols="30" rows="10"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div style="font-size: small;">* Message maximum 160 character</div>
+            </td>
+        </tr>
+    </table>
+
+    <button onclick="submit()">Submit</button>
+    </form>
+
+    <div id="guestbook"></div>
+
+    <script>
+        function submit() {
+            let url = "/api/v1/message"
+
+            let name = document.getElementById("name").value
+            let contact = document.getElementById("contact").value
+            let message = document.getElementById("message").value
+
+            let data = {
+                name: name,
+                contact: contact,
+                message: message
+            }
+
+            console.log(JSON.stringify(data))
+
+            let fetchData = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+
+            fetch(url, fetchData)
+                .then(response => {
+                    if (response.status == 201) {
+                        alert("Message submitted")
+                        populate()
+                    } else {
+                        alert("Error, message not sent.")
+                    }
+                });
+        }
+
+        function populate() {
+            let url = "/api/v1/messages"
+
+            fetch(url).then(response => {
+                response.json().then(res => {
+                    res.forEach(r => {
+                        let tgl = new Date(r.created_at)
+                        document.getElementById("guestbook").innerHTML +=
+                            "<br><b>" + r.name + "</b> <span style='font-color: grey;'> " + tgl.toString() +
+                            "</span><br>" + r.message + "<br>"
+                    });
+                })
+            })
+        }
+
+        populate()
+
+        console.log("please don't hack this site, thank you :)")
+    </script>
+</body>
+
+</html>
