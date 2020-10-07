@@ -19,5 +19,5 @@ func main() {
 		os.Getenv("DB_USERNAME"),
 		os.Getenv("DB_PASSWORD"))
 
-	a.Run(os.Getenv("APP_PORT"))
+	a.Run(os.Getenv("PORT"))
 }
