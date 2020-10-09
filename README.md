@@ -62,7 +62,7 @@ ALTER TABLE `messages` MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 - Arrange file structure.
 - Generate the OpenApi document automatically. Currently, I write it manually on swagger.yaml file
 - Fix user interfaces for client example, make it more beautiful
-
+- Form validation
 
 
 ### LICENSE
